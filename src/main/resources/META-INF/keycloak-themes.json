@@ -1,0 +1,6 @@
+{
+    "themes": [{
+        "name" : "2S-Login",
+        "types": [ "email" ,"login"]  
+    }]
+}

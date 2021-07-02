@@ -1,0 +1,4 @@
+.settings/
+target/
+**/.flattened-pom.xml
+/bin/
