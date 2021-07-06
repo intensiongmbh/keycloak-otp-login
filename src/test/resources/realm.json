@@ -1136,8 +1136,8 @@
     "ssl": "",
     "user": "intension/testmails"
   },
-  "loginTheme": "2S-Login",
-  "emailTheme": "2S-Login",
+  "loginTheme": "Otp-Login",
+  "emailTheme": "Otp-Login",
   "eventsEnabled": false,
   "eventsListeners": [
     "jboss-logging"
@@ -1457,7 +1457,7 @@
       "builtIn": false,
       "authenticationExecutions": [
         {
-          "authenticator": "two-step-login-with-code",
+          "authenticator": "keycloak-otp-login",
           "requirement": "REQUIRED",
           "priority": 0,
           "userSetupAllowed": false,

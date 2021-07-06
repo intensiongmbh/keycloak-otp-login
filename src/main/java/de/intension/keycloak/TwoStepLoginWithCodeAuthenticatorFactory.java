@@ -1,5 +1,6 @@
 package de.intension.keycloak;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.keycloak.Config;
@@ -14,7 +15,7 @@ public class TwoStepLoginWithCodeAuthenticatorFactory
     implements AuthenticatorFactory
 {
 
-    public static final String                                      ID                  = "two-step-login-with-code";
+    public static final String                                      ID                  = "keycloak-otp-login";
 
     private static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
             AuthenticationExecutionModel.Requirement.REQUIRED,
@@ -62,19 +63,19 @@ public class TwoStepLoginWithCodeAuthenticatorFactory
     @Override
     public String getDisplayType()
     {
-        return "Two-step login with code";
+        return "Otp Login";
     }
 
     @Override
     public String getHelpText()
     {
-        return "Two-step login with code";
+        return "Otp Login";
     }
 
     @Override
     public List<ProviderConfigProperty> getConfigProperties()
     {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

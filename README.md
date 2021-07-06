@@ -9,9 +9,13 @@ It grants improved security, by removing the security issues of user created pas
 Developed and tested in Keycloak version 12.0.1.
 Tested for 13.0.1.
 
+## Testing
+
+For the LoginFlowTest testing the Maildev container must be running.
+
 ## How to configure in Keycloak
 
- 1. Once  `keycloak-two-step-login-with-code` is deployed on your server, (re-)start said server.
+ 1. Once  `keycloak-otp-login` is deployed on your server, (re-)start said server.
  
     You can use `./restart.sh` in the root directory of the project.
  
@@ -21,13 +25,13 @@ Tested for 13.0.1.
  3. Delete `Username Password Form` and `Browser - Conditional OTP` in your new flows Forms.
    ![image](images/executions-to-delete.png)
    
- 4. Add a new execution to `*your flow name* Forms` using the `two-step-login-with-code` provider and set its requirement to `REQUIRED`.
+ 4. Add a new execution to `*your flow name* Forms` using the `keycloak-otp-login` provider and set its requirement to `REQUIRED`.
    ![image](images/add-execution.png)
    
  5. Switch to the `Bindings` tab and change your Browser Flow to your new flow and save the settings.
    ![image](images/change-browser-flow.png)
    
- 6. Now open the `Realm Settings`, go to the `Themes` tab and select the `2S-Login` for the Login- aswell as the Email Theme.
+ 6. Now open the `Realm Settings`, go to the `Themes` tab and select the `Otp-Login` for the Login- aswell as the Email Theme.
    ![image](images/change-themes.png)
 
  7. Enable `Internationalization` and remove all the `Supported Locales` except `de` and `en` (and any languages you added) and set the `Default Locale` to your preference and save.

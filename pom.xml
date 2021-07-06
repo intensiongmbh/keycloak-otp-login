@@ -6,10 +6,10 @@
 
   <version>${revision}${changelist}</version>
 
-  <artifactId>keycloak-two-step-login-with-code</artifactId>
+  <artifactId>keycloak-otp-login</artifactId>
   <packaging>jar</packaging>
 
-  <name>Keycloak-two-step-login-with-code</name>
+  <name>Keycloak-otp-login</name>
   <description>Provides system to login using a code sent by e-mail instead of using a password.</description>
 
   <properties>
@@ -111,10 +111,8 @@
     </dependency>
   </dependencies>
 
-
-
   <build>
-    <finalName>keycloak-two-step-login-with-code</finalName>
+    <finalName>keycloak-otp-login</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -123,23 +121,6 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-            </manifest>
-            <manifestEntries>
-              <Dependencies>org.keycloak.keycloak-core, org.keycloak.keycloak-server-spi, org.keycloak.keycloak-server-spi-private, org.keycloak.keycloak-services,
-                org.jboss.logging</Dependencies>
-            </manifestEntries>
-          </archive>
         </configuration>
       </plugin>
 

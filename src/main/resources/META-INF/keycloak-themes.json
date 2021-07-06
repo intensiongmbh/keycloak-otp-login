@@ -1,6 +1,6 @@
 {
     "themes": [{
-        "name" : "2S-Login",
+        "name" : "Otp-Login",
         "types": [ "email" ,"login"]  
     }]
 }

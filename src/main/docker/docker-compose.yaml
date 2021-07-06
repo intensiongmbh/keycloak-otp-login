@@ -6,7 +6,7 @@ services:
     ports:
     - 18080:8080
     volumes:    
-    - ../../../target/keycloak-two-step-login-with-code.jar:/opt/jboss/keycloak/standalone/deployments/keycloak-two-step-login-with-code.jar   
+    - ../../../target/keycloak-otp-login.jar:/opt/jboss/keycloak/standalone/deployments/keycloak-otp-login.jar   
     - ./realm.json:/opt/jboss/keycloak/imports/realm.json
     environment:
       KEYCLOAK_USER: admin

@@ -24,7 +24,7 @@ public class EmailSender
         EmailTemplateProvider emailSender = session.getProvider(EmailTemplateProvider.class);
         emailSender.setRealm(realm);
 
-        boolean result = true;
+        var result = true;
         try {
             emailSender.setUser(user);
             emailSender.send(code + " Login Code", "loginCode.ftl", createCodeLoginAttributes(code));

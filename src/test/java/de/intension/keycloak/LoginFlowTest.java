@@ -7,6 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpClient.Version;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -16,15 +17,23 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.seljup.Options;
 import io.github.bonigarcia.seljup.SeleniumJupiter;
 
 @ExtendWith(SeleniumJupiter.class)
 @TestMethodOrder(OrderAnnotation.class)
 class LoginFlowTest extends KeycloakExtensionTestBase
 {
+
+    @Options
+    FirefoxOptions firefoxOptions = new FirefoxOptions();
+    {
+        firefoxOptions.addArguments(Arrays.asList("--headless"));
+    }
 
     /**
      * GIVEN: user with email
