@@ -1,7 +1,0 @@
-master_test:
-  stage: build
-  image: maven:3.6.3-openjdk-11-slim
-  script:
-    - mvn --batch-mode --update-snapshots package -DskipTests && mvn verify
-  tags:
-  - docker-runner

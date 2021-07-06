@@ -11,7 +11,7 @@ Tested for 13.0.1.
 
 ## Testing
 
-For the LoginFlowTest testing the Maildev container must be running.
+For the LoginFlowTest testing the Maildev container must be running. It can be started with the `restart.sh` script.
 
 ## How to configure in Keycloak
 
