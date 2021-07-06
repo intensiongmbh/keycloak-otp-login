@@ -18,7 +18,7 @@ import org.keycloak.models.UserModel;
  * else he gets redirected to the email input view.
  */
 
-public class TwoStepLoginWithCodeAuthenticator extends AbstractUsernameFormAuthenticator
+public class OtpLoginAuthenticator extends AbstractUsernameFormAuthenticator
     implements Authenticator
 {
 
@@ -31,7 +31,7 @@ public class TwoStepLoginWithCodeAuthenticator extends AbstractUsernameFormAuthe
     private EmailSender         emailSender;
     private SecureCode          secureCode;
 
-    public TwoStepLoginWithCodeAuthenticator(EmailSender emailSender, SecureCode secureCode)
+    public OtpLoginAuthenticator(EmailSender emailSender, SecureCode secureCode)
     {
         this.emailSender = emailSender;
         this.secureCode = secureCode;

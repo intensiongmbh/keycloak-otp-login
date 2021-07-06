@@ -11,7 +11,7 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 
-public class TwoStepLoginWithCodeAuthenticatorFactory
+public class OtpLoginAuthenticatorFactory
     implements AuthenticatorFactory
 {
 
@@ -27,7 +27,7 @@ public class TwoStepLoginWithCodeAuthenticatorFactory
     @Override
     public Authenticator create(KeycloakSession session)
     {
-        return new TwoStepLoginWithCodeAuthenticator(new EmailSender(), new SecureCode());
+        return new OtpLoginAuthenticator(new EmailSender(), new SecureCode());
     }
 
     @Override
@@ -39,7 +39,7 @@ public class TwoStepLoginWithCodeAuthenticatorFactory
     @Override
     public String getReferenceCategory()
     {
-        return "twoStepLoginWithCode";
+        return "OtpLogin";
     }
 
     @Override
