@@ -9,8 +9,8 @@
   <artifactId>keycloak-otp-login</artifactId>
   <packaging>jar</packaging>
 
-  <name>Keycloak-otp-login</name>
-  <description>Provides system to login using a code sent by e-mail instead of using a password.</description>
+  <name>Keycloak OTP Login</name>
+  <description>Keycloak extension to login using a code sent by e-mail instead of using a password.</description>
 
   <properties>
     <revision>1.0.0</revision>
@@ -18,13 +18,11 @@
     <keycloak.version>13.0.1</keycloak.version>
     <java.version>11</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
-    <mockito.version>3.6.28</mockito.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit-jupiter.version>5.7.1</junit-jupiter.version>
+    <junit-jupiter.version>5.7.2</junit-jupiter.version>
   </properties>
 
   <dependencies>
-
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-core</artifactId>
@@ -82,7 +80,7 @@
     <dependency>
       <groupId>de.intension</groupId>
       <artifactId>keycloak-test-container</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -101,18 +99,18 @@
       <groupId>org.subethamail</groupId>
       <artifactId>subethasmtp</artifactId>
       <version>3.1.7</version>
+      <scope>test</scope>
       <exclusions>
         <exclusion>
           <groupId>javax.mail</groupId>
           <artifactId>mail</artifactId>
         </exclusion>
       </exclusions>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
   <build>
-    <finalName>keycloak-otp-login</finalName>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -123,50 +121,6 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <version>1.0.1</version>
-        <configuration>
-          <updatePomFile>true</updatePomFile>
-        </configuration>
-        <executions>
-          <execution>
-            <id>flatten</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>flatten</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.2</version>
-        <configuration>
-          <destFile>${sonar.jacoco.reportPath}</destFile>
-          <append>true</append>
-        </configuration>
-        <executions>
-          <execution>
-            <id>agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
     </plugins>
   </build>
 </project>

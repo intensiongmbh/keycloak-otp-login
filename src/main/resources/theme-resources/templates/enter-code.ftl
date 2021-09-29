@@ -16,6 +16,10 @@
                         <input tabindex="1" id="codeInput" class="${properties.kcInputClass!}" name="codeInput"  type="text" autofocus autocomplete="off" />
                     </div>
                 </div>
+                
+                <div class="${properties.kcLabelWrapperClass!}">
+                    <label for="email" class="${properties.kcLabelClass!}">${msg("enterCodeNote")}</label>
+                </div>
 
                 <div class="${properties.kcFormGroupClass!}">
                     <div id="kc-form-options" class="${properties.kcFormOptionsClass!}">

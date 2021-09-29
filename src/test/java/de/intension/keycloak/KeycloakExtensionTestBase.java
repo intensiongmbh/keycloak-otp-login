@@ -39,7 +39,7 @@ public class KeycloakExtensionTestBase
     @BeforeAll
     public static void beforeClass()
     {
-        keycloak = new KeycloakDevContainer("keycloak-otp-login");
+        keycloak = new KeycloakDevContainer("quay.io/keycloak/keycloak:13.0.1").withExtension("keycloak-otp-login");
         keycloak.withReuse(true);
         keycloak.withExposedPorts(8080, 8787);
         keycloak.withFixedExposedPort(8787, 8787);

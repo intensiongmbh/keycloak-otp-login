@@ -63,13 +63,13 @@ public class OtpLoginAuthenticatorFactory
     @Override
     public String getDisplayType()
     {
-        return "Otp Login";
+        return "OTP Login";
     }
 
     @Override
     public String getHelpText()
     {
-        return "Otp Login";
+        return "OTP Login";
     }
 
     @Override

@@ -32,6 +32,7 @@ class LoginFlowTest extends KeycloakExtensionTestBase
     @Options
     FirefoxOptions firefoxOptions = new FirefoxOptions();
     {
+        //Comment the following line out to see the browser as the test is running
         firefoxOptions.addArguments(Arrays.asList("--headless"));
     }
 
@@ -67,15 +68,20 @@ class LoginFlowTest extends KeycloakExtensionTestBase
         TimeUnit.SECONDS.sleep(2); // necessary due to codeActivationDelay
         wait.until(ExpectedConditions.elementToBeClickable(By.id("login")));
         driver.findElementById("login").click();
+        response = HttpClient.newBuilder().version(Version.HTTP_1_1).build()
+            .send(request, HttpResponse.BodyHandlers.ofString()).body();
+        code = response.substring(response.lastIndexOf("<h3>") + 4, response.lastIndexOf("</h3>"));
+        driver.findElementById("codeInput").sendKeys(code);
+        TimeUnit.SECONDS.sleep(2); // necessary due to codeActivationDelay
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("login")));
+        driver.findElementById("login").click();
         wait.until(ExpectedConditions.elementToBeClickable(By.id("landingSignOutButton")));
         assertEquals("http://localhost:" + keycloak.getHttpPort() + "/auth/realms/" + REALM + "/account/#/",
                      driver.getCurrentUrl());
         driver.findElementById("landingSignOutButton").click();
         wait.until(ExpectedConditions.elementToBeClickable(By.id("landingSignInButton")));
-        assertEquals(
-                     "http://localhost:" + keycloak.getHttpPort() + "/auth/realms/" + REALM + "/account/#/",
+        assertEquals("http://localhost:" + keycloak.getHttpPort() + "/auth/realms/" + REALM + "/account/#/",
                      driver.getCurrentUrl());
-
     }
 
     private void getAccountUrl(FirefoxDriver driver)
