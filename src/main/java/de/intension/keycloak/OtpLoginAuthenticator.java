@@ -12,10 +12,10 @@ import org.keycloak.models.UserModel;
 
 /**
  * Creates alternative login flow
- * After user enters his email he receives an email containing a code which he
+ * After user identifies himself he receives an email containing a code which he
  * has to enter in a follow up view.
  * If all conditions for the code validation are met he gets logged in
- * else he gets redirected to the email input view.
+ * else he has to restart the process.
  */
 
 public class OtpLoginAuthenticator extends AbstractUsernameFormAuthenticator
@@ -56,14 +56,7 @@ public class OtpLoginAuthenticator extends AbstractUsernameFormAuthenticator
                 context.failure(AuthenticationFlowError.INVALID_USER);
             }
             else {
-
-                String code = secureCode.generateCode(6);
-                context.getAuthenticationSession().setAuthNote(AUTH_NOTE_EMAIL_CODE, code);
-                context.getAuthenticationSession().setAuthNote(AUTH_NOTE_TIMESTAMP,
-                                                               Long.toString(System.currentTimeMillis()));
-
-                emailSender.sendEmail(context.getSession(), context.getRealm(),
-                                      getUser(context), secureCode.makeCodeUserFriendly(code));
+                generateAndSendCode(context);
             }
 
         }
@@ -76,24 +69,56 @@ public class OtpLoginAuthenticator extends AbstractUsernameFormAuthenticator
             }
             else {
                 context.failureChallenge(AuthenticationFlowError.INVALID_CREDENTIALS,
-                                         context.form().createForm(FTL_ENTER_EMAIL));
+                                         context.form().createForm(redirectBasedOnProvidedUserInfo(context)));
             }
         }
         else {
-            context.challenge(context.form().createForm(FTL_ENTER_EMAIL));
+            context.challenge(context.form().createForm(redirectBasedOnProvidedUserInfo(context)));
         }
+    }
+
+    /**
+     * calls secureCode class method to generate code and sends it to the flow attached users email
+     */
+    private void generateAndSendCode(AuthenticationFlowContext context)
+    {
+        String code = secureCode.generateCode(6);
+        context.getAuthenticationSession().setAuthNote(AUTH_NOTE_EMAIL_CODE, code);
+        context.getAuthenticationSession().setAuthNote(AUTH_NOTE_TIMESTAMP,
+                                                       Long.toString(System.currentTimeMillis()));
+
+        emailSender.sendEmail(context.getSession(), context.getRealm(),
+                              getUser(context), secureCode.makeCodeUserFriendly(code));
     }
 
     private UserModel getUser(AuthenticationFlowContext context)
     {
-        KeycloakSession session = context.getSession();
-        return session.users().getUserByEmail(context.getAuthenticationSession().getAuthNote(AUTH_NOTE_USER_EMAIL), context.getRealm());
+        return context.getSession().users().getUserByEmail(context.getAuthenticationSession().getAuthNote(AUTH_NOTE_USER_EMAIL), context.getRealm());
     }
 
     @Override
     public void authenticate(AuthenticationFlowContext context)
     {
-        context.challenge(context.form().createForm(FTL_ENTER_EMAIL));
+        context.challenge(context.form().createForm(redirectBasedOnProvidedUserInfo(context)));
+
+    }
+
+    /**
+     * checks if there already is a user attached to the authentication flow to avoid asking for
+     * identity more than once
+     */
+    private String redirectBasedOnProvidedUserInfo(AuthenticationFlowContext context)
+    {
+        String redirect;
+        try {
+            context.getAuthenticationSession().setAuthNote(AUTH_NOTE_USER_EMAIL, context.getUser().getEmail());
+            generateAndSendCode(context);
+            redirect = FTL_ENTER_CODE;
+        } catch (NullPointerException e) {
+            redirect = FTL_ENTER_EMAIL;
+        }
+
+        return redirect;
     }
 
     @Override
