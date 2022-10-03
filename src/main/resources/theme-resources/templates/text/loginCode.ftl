@@ -1,2 +1,2 @@
 <#ftl output_format="plainText">
-${msg("loginCodeBody", code)}
+${msg("loginCodeBody", loginCode)}
