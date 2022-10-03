@@ -58,11 +58,6 @@ Continue with:
    ![image](images/change-browser-flow.png)
    
    
-1. Now open the `Realm Settings`, go to the `Themes` tab and select the `Otp-Login` for the Login- aswell as the Email Theme.
-   
-   ![image](images/change-themes.png)
-   
-   
 1. Enable `Internationalization` and remove all the `Supported Locales` except `de` and `en` (and any languages you added) and set the `Default Locale` to your preference and save.
    
    ![image](images/choose-locales.png)
